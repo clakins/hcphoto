@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUNBURN - Minimalist Photo Project</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles for Minimal White/Black Aesthetic */
+        :root {
+            --color-primary: #FFFFFF; /* True White */
+            --color-text: #1F2937;   /* Dark Gray/Black Text */
+            --color-link: #4B5563;   /* Subtle Link Gray */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-primary);
+            color: var(--color-text);
+        }
+        .gallery-item {
+            cursor: pointer;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .gallery-item:hover {
+            opacity: 0.9;
+        }
+        /* Modal (Lightbox) Styling */
+        .modal {
+            background-color: rgba(255, 255, 255, 0.98); /* Light transparent background */
+        }
+        .modal-content {
+            max-height: 95vh;
+            max-width: 95vw;
+        }
+        .image-container {
+            margin-bottom: 2rem; 
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Header & Navigation - Very Minimalist -->
+    <header class="p-4 md:p-6 bg-white border-b border-gray-200 sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-gray-800 tracking-widest uppercase">
+                Chris McCaw
+            </h1>
+            <nav class="space-x-4 text-sm md:text-base">
+                <a href="#portfolio" class="text-gray-600 hover:text-black transition duration-200 uppercase font-medium">Works</a>
+                <a href="#about" class="text-gray-600 hover:text-black transition duration-200 uppercase font-medium">About</a>
+                <a href="#contact" class="text-gray-600 hover:text-black transition duration-200 uppercase font-medium">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Project Title Section (Hero) -->
+    <section class="text-center py-16 md:py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-6xl md:text-8xl font-thin mb-6 text-black tracking-tight uppercase">
+            SUNBURN
+        </h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            A project taking the analogue photographic medium to its outer boundaries. Unique direct-positive photographic prints made using extremely long exposures and a custom-built camera.
+        </p>
+        <p class="text-sm text-gray-400 mt-4">
+            For more information about the process, click on "About".
+        </p>
+    </section>
+
+    <!-- Portfolio Gallery Section - Single Column, Large Images with Metadata -->
+    <section id="portfolio" class="pt-12 md:pt-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Image Grid - Now a single, stacked column for high impact -->
+        <div class="grid grid-cols-1 gap-16">
+
+            <!-- Gallery Item 1 -->
+            <div class="gallery-item image-container" data-full-src="https://placehold.co/1200x800/E5E7EB/4B5563?text=Sunburned+Yukon+8x10" data-caption="Sunburned GSP#480 (Yukon), 2011. 8'x10' unique gelatin silver paper.">
+                <img src="https://placehold.co/800x600/E5E7EB/4B5563?text=Sunburned+Yukon+8x10" 
+                     alt="Sunburned Yukon" 
+                     class="w-full shadow-lg border border-gray-300 mx-auto object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/800x600/DDDDDD/000000?text=Image+Load+Error';"
+                >
+                <div class="mt-4 text-left">
+                    <p class="text-sm text-gray-700 font-light">Sunburned GSP#480 (Yukon), 2011. 8"x10" unique gelatin silver paper.</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 2 -->
+            <div class="gallery-item image-container" data-full-src="https://placehold.co/800x1200/F3F4F6/374151?text=Sunburned+SF+Bay+16x20" data-caption="Sunburned GSP#202 (SF Bay/expanding), 2008. 16'x20' unique gelatin silver paper.">
+                <img src="https://placehold.co/600x900/F3F4F6/374151?text=Sunburned+SF+Bay+16x20" 
+                     alt="Sunburned SF Bay" 
+                     class="w-full shadow-lg border border-gray-300 mx-auto object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/800x600/DDDDDD/000000?text=Image+Load+Error';"
+                >
+                <div class="mt-4 text-left">
+                    <p class="text-sm text-gray-700 font-light">Sunburned GSP#202 (SF Bay/expanding), 2008. 16"x20" unique gelatin silver paper.</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 3 -->
+            <div class="gallery-item image-container" data-full-src="https://placehold.co/1600x900/D1D5DB/4B5563?text=Sunburned+Arctic+Circle" data-caption="Sunburned GSP#839 (Every 30 minutes, Arctic Circle, Alaska), 2015. 20'x24'.">
+                <img src="https://placehold.co/800x450/D1D5DB/4B5563?text=Sunburned+Arctic+Circle" 
+                     alt="Sunburned Arctic Circle" 
+                     class="w-full shadow-lg border border-gray-300 mx-auto object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/800x600/DDDDDD/000000?text=Image+Load+Error';"
+                >
+                <div class="mt-4 text-left">
+                    <p class="text-sm text-gray-700 font-light">Sunburned GSP#839 (Every 30 minutes, Arctic Circle, Alaska), 2015. 20"x24".</p>
+                </div>
+            </div>
+            
+            <!-- Gallery Item 4 -->
+            <div class="gallery-item image-container" data-full-src="https://placehold.co/1000x1000/F9FAFB/1F2937?text=Sunburned+Mojave+20x24" data-caption="Sunburned GSP #835(Mojave), 2015. 20'x24' unique gelatin silver paper.">
+                <img src="https://placehold.co/800x800/F9FAFB/1F2937?text=Sunburned+Mojave+20x24" 
+                     alt="Sunburned Mojave" 
+                     class="w-full shadow-lg border border-gray-300 mx-auto object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/800x600/DDDDDD/000000?text=Image+Load+Error';"
+                >
+                <div class="mt-4 text-left">
+                    <p class="text-sm text-gray-700 font-light">Sunburned GSP #835(Mojave), 2015. 20"x24" unique gelatin silver paper.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section (for contextual text) -->
+    <section id="about" class="py-20 md:py-32 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center border-t border-gray-200 mt-20">
+        <h3 class="text-4xl font-light mb-8 text-black uppercase">About the Project</h3>
+        <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            The 'Sunburn' series explores the fundamental connection between light, time, and the photographic process. By using large-format, custom-built cameras as solar telescopes, the paper—a direct positive photographic material—is exposed for long periods, sometimes an entire day.
+        </p>
+        <p class="text-lg text-gray-600 leading-relaxed">
+            The sun's intensity burns and scorches the paper, leaving a visible path of light recorded through time, resulting in unique, one-of-a-kind prints that are both image and object.
+        </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 md:py-20 bg-gray-50 border-t border-b border-gray-200">
+        <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 class="text-4xl font-light mb-6 text-black uppercase">Contact</h3>
+            <p class="text-lg text-gray-600 mb-8">
+                For exhibition inquiries, prints, or licensing, please reach out directly.
+            </p>
+            <div class="space-y-4">
+                <p class="text-xl">Email: <a href="mailto:your.email@example.com" class="text-gray-600 hover:text-black font-medium transition duration-200">your.email@example.com</a></p>
+                <button onclick="window.location.href='mailto:your.email@example.com'" 
+                    class="mt-6 w-full sm:w-auto px-8 py-3 bg-black text-white font-bold rounded-sm hover:bg-gray-800 transition transform duration-300 border border-black">
+                    EMAIL INQUIRIES
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="p-4 text-center text-gray-500 text-sm bg-white border-t border-gray-200">
+        &copy; 2025 [Your Name]. All rights reserved.
+    </footer>
+
+    <!-- Lightbox Modal (Hidden by default) -->
+    <div id="image-modal" class="modal fixed inset-0 flex items-center justify-center z-50 hidden transition-opacity duration-300">
+        <div class="relative p-4">
+            <!-- Full-size Image -->
+            <img id="modal-image" class="modal-content shadow-2xl object-contain transition-transform duration-300 transform scale-95 border border-gray-300" src="" alt="Full size photograph">
+            
+            <!-- Caption -->
+            <p id="modal-caption" class="text-center mt-4 text-gray-600 text-sm max-w-lg mx-auto"></p>
+            
+            <!-- Close Button -->
+            <button id="modal-close" class="absolute top-4 right-4 text-black text-3xl font-thin p-2 hover:text-gray-600 transition duration-200 focus:outline-none">
+                &times;
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- JavaScript for the Lightbox/Modal functionality ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalCaption = document.getElementById('modal-caption');
+            const closeButton = document.getElementById('modal-close');
+            const galleryImages = document.querySelectorAll('.gallery-item');
+            
+            // Function to show the modal
+            const showModal = (fullSrc, caption) => {
+                modalImage.src = fullSrc;
+                modalCaption.textContent = caption;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling the main page
+            };
+
+            // Function to hide the modal
+            const hideModal = () => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore scrolling
+            };
+
+            // Add click listener to each gallery image
+            galleryImages.forEach(item => {
+                item.addEventListener('click', () => {
+                    const fullSrc = item.getAttribute('data-full-src');
+                    const caption = item.getAttribute('data-caption');
+                    showModal(fullSrc, caption);
+                });
+            });
+
+            // Add close listeners
+            closeButton.addEventListener('click', hideModal);
+            
+            // Close when clicking outside the image
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    hideModal();
+                }
+            });
+
+            // Close with ESC key
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    hideModal();
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
