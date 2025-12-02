@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; padding: 0; background: #fafafa; color: #111; }
+    header { padding: 18px 20px; border-bottom: 1px solid #eee; }
+    header h1 { margin: 0; font-size: 20px; }
+    nav a { text-decoration: none; color: inherit; }
+    main { max-width: 700px; margin: 40px auto; padding: 0 20px; }
+    form { display: grid; gap: 16px; margin-top: 20px; }
+    input, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; }
+    button { padding: 12px 18px; background: #111; color: white; border: 0; border-radius: 6px; cursor: pointer; font-size: 15px; }
+    button:hover { opacity: .85; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Contact</h1>
+  <nav><a href="index.html">← Home</a></nav>
+</header>
+
+<main>
+  <p>If you'd like to reach out about photography work, collaboration, or anything else, send a message below.</p>
+
+  <form>
+    <div>
+      <label>Name</label>
+      <input type="text" placeholder="Your name" required />
+    </div>
+    <div>
+      <label>Email</label>
+      <input type="email" placeholder="email@example.com" required />
+    </div>
+    <div>
+      <label>Message</label>
+      <textarea rows="6" placeholder="Write your message..." required></textarea>
+    </div>
+    <button type="submit">Send</button>
+  </form>
+</main>
+</body>
+</html>
