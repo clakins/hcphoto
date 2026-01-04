@@ -32,20 +32,21 @@
         }
 
         /* Custom style for the circular masked image effect */
-        .circular-mask {
-            /* Create a large, dark container to represent the background image */
-            background-color: transparent;
-            opacity: 1;
-            background-image: url('images/cinestill1-min.jpg');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            height: 100%;
-            min-height: 500px;
-            aspect-ratio: 1 / 1;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-            border-radius: 0.5rem; /* Rounded corners for the outer container */
-        }
+       .circular-mask {
+    background-color: transparent;
+    background-image: url('images/cinestill1-min.jpg');
+    background-size: cover; /* make it cover the box nicely */
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;          /* take full width of column */
+    max-width: 500px;     /* optional: cap the size */
+    aspect-ratio: 1 / 1;  /* keep it square */
+    border-radius: 50%;   /* make it circular */
+    margin: 0 auto;       /* center in column */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -2px rgba(0, 0, 0, 0.06);
+}
+
 
         /* Style for exhibition titles */
         .exhibition-item a {
