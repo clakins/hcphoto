@@ -9,16 +9,15 @@
       --cols: 3;
       --gap: 14px;
       --thumb-radius: 6px;
-      --max-thumb-width: 300px;
-      --max-thumb-height: 250px;
-      --overlay-bg: rgba(10, 10, 10, 0.95);
       --page-bg: #eeeeee;
       --max-width: 1200px;
+      /* Darker, solid overlay to prevent distraction */
+      --overlay-bg: rgba(15, 15, 15, 0.98); 
     }
 
     * { box-sizing: border-box; }
     body {
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
       margin: 0;
       color: #111;
       background: var(--page-bg);
@@ -27,43 +26,30 @@
     header {
       padding: 18px 20px;
       display: flex;
-      gap: 12px;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #ddd;
       background: #fff;
     }
     header h1 { font-size: 18px; margin: 0; }
-    nav a {
-      color: inherit;
-      text-decoration: none;
-      padding: 8px 10px;
-      border-radius: 6px;
-    }
-    nav a:hover { background: #eee; }
+    nav a { color: inherit; text-decoration: none; padding: 8px 10px; }
 
     .container { max-width: var(--max-width); margin: 26px auto; padding: 0 18px; }
 
-    /* Gallery grid */
+    /* Gallery Grid */
     .gallery {
       display: grid;
       grid-template-columns: repeat(var(--cols), 1fr);
       gap: var(--gap);
-      justify-items: center;
     }
 
     .thumb {
+      margin: 0;
       overflow: hidden;
       border-radius: var(--thumb-radius);
       background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-width: var(--max-thumb-width);
-      max-height: var(--max-thumb-height);
-      width: 100%;
-      aspect-ratio: 4 / 3; /* Keeps grid consistent */
       cursor: pointer;
+      aspect-ratio: 1 / 1; /* Makes grid look organized */
       border: 1px solid #ddd;
     }
 
@@ -71,86 +57,83 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover; /* Thumbnails look best cropped to fill the square */
-      transition: transform .28s ease;
+      object-fit: cover;
+      transition: transform .3s ease;
     }
     .thumb:hover img { transform: scale(1.05); }
 
     .caption { margin-bottom: 20px; font-size: 13px; color: #555; text-align: center; }
 
-    /* Lightbox overlay */
+    /* Lightbox - Fixed to prevent distraction */
     .lightbox {
       position: fixed;
       inset: 0;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       background: var(--overlay-bg);
+      backdrop-filter: blur(10px); /* Blurs the background webpage */
       z-index: 1000;
       visibility: hidden;
       opacity: 0;
-      transition: opacity .2s ease;
+      transition: opacity .25s ease;
     }
     .lightbox.open { visibility: visible; opacity: 1; }
 
-    .lightbox .stage {
-      width: 90vw;
-      height: 85vh;
-      position: relative;
+    .stage {
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
     }
 
     .lightbox img {
-      display: block;
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain; /* FIX: Keeps aspect ratio without cropping */
-      user-select: none;
+      max-width: 95%;
+      max-height: 85vh; /* Prevents portrait photos from being cut off at bottom */
+      object-fit: contain; /* Keeps aspect ratio perfect */
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
     /* Controls */
     .btn {
-      position: fixed; 
-      top: 50%; 
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.1); 
-      border: 0; 
-      font-size: 32px; 
-      color: #fff;
-      padding: 20px 15px; 
-      cursor: pointer; 
-      border-radius: 4px;
-      transition: background 0.2s;
+      position: absolute;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+      padding: 20px;
+      z-index: 1010;
+      user-select: none;
     }
-    .btn:hover { background: rgba(255,255,255,0.2); }
-    .btn.left { left: 20px; }
-    .btn.right { right: 20px; }
+    .btn.left { left: 10px; }
+    .btn.right { right: 10px; }
     
-    .close-btn { 
-      position: fixed; 
-      right: 20px; 
-      top: 20px; 
-      font-size: 30px; 
-      background: none; 
-      border: none; 
-      color: #fff; 
-      cursor: pointer; 
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 1020;
     }
 
-    .meta { 
-      position: absolute; 
-      bottom: -40px; 
-      color: #fff; 
-      font-size: 14px; 
-      letter-spacing: 1px;
+    .meta {
+      margin-top: 15px;
+      color: #ccc;
+      font-size: 14px;
     }
 
     @media (max-width: 980px) { :root { --cols: 2; } }
     @media (max-width: 520px) { 
-        :root { --cols: 1; } 
-        .btn { padding: 10px; font-size: 24px; }
+      :root { --cols: 1; } 
+      .btn { font-size: 30px; padding: 10px; }
     }
   </style>
 </head>
@@ -158,132 +141,100 @@
 
 <header>
   <h1>Gallery</h1>
-  <nav>
-    <a href="index.html">← Home</a>
-  </nav>
+  <nav><a href="index.html">← Home</a></nav>
 </header>
 
 <main class="container">
-  <p class="caption">Click any image to enlarge. Use ← → keys to navigate; Esc to close.</p>
+  <p class="caption">Click any image to enlarge. Use ← → or Esc keys.</p>
 
   <section class="gallery" id="gallery">
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1019.jpg" alt="DP3M1019"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1065.jpg" alt="DP3M1065"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1084.jpg" alt="DP3M1084"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1089.jpg" alt="DP3M1089"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1098.jpg" alt="DP3M1098"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1122.jpg" alt="DP3M1122"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1188.jpg" alt="DP3M1188"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1272.jpg" alt="DP3M1272"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1284.jpg" alt="DP3M1284"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1291.jpg" alt="DP3M1291"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1293.jpg" alt="DP3M1293"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1321.jpg" alt="DP3M1321"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1365.jpg" alt="DP3M1365"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1386.jpg" alt="DP3M1386"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1400.jpg" alt="DP3M1400"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1403.jpg" alt="DP3M1403"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1416.jpg" alt="DP3M1416"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012436.jpg" alt="R0012436"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012486.jpg" alt="R0012486"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012488.jpg" alt="R0012488"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012493.jpg" alt="R0012493"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012505.jpg" alt="R0012505"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012508.jpg" alt="R0012508"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012509.jpg" alt="R0012509"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012578.jpg" alt="R0012578"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012582.jpg" alt="R0012582"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012661.jpg" alt="R0012661"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012752.jpg" alt="R0012752"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012880-2.jpg" alt="R0012880-2"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012979.jpg" alt="R0012979"></figure>
-    <figure class="thumb" tabindex="0"><img src="/hcphoto/images/R0012994.jpg" alt="R0012994"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1019.jpg" alt="DP3M1019"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1065.jpg" alt="DP3M1065"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1084.jpg" alt="DP3M1084"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1089.jpg" alt="DP3M1089"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1098.jpg" alt="DP3M1098"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1122.jpg" alt="DP3M1122"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1188.jpg" alt="DP3M1188"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1272.jpg" alt="DP3M1272"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1284.jpg" alt="DP3M1284"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1291.jpg" alt="DP3M1291"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1293.jpg" alt="DP3M1293"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1321.jpg" alt="DP3M1321"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1365.jpg" alt="DP3M1365"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1386.jpg" alt="DP3M1386"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1400.jpg" alt="DP3M1400"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1403.jpg" alt="DP3M1403"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/DP3M1416.jpg" alt="DP3M1416"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012436.jpg" alt="R0012436"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012486.jpg" alt="R0012486"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012488.jpg" alt="R0012488"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012493.jpg" alt="R0012493"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012505.jpg" alt="R0012505"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012508.jpg" alt="R0012508"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012509.jpg" alt="R0012509"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012578.jpg" alt="R0012578"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012582.jpg" alt="R0012582"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012661.jpg" alt="R0012661"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012752.jpg" alt="R0012752"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012880-2.jpg" alt="R0012880-2"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012979.jpg" alt="R0012979"></figure>
+    <figure class="thumb"><img src="/hcphoto/images/R0012994.jpg" alt="R0012994"></figure>
   </section>
 </main>
 
-<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
-  <button class="close-btn" id="close" aria-label="Close">✕</button>
-  <button class="btn left" id="prev" aria-label="Previous">◄</button>
-  
-  <div class="stage" id="stage">
-    <img id="lightbox-img" src="" alt="">
-    <div class="meta" id="meta"></div>
+<div class="lightbox" id="lightbox">
+  <button class="close-btn" id="close">✕</button>
+  <div class="stage">
+    <button class="btn left" id="prev">◄</button>
+    <img id="lb-img" src="">
+    <button class="btn right" id="next">►</button>
   </div>
-  
-  <button class="btn right" id="next" aria-label="Next">►</button>
+  <div class="meta" id="meta"></div>
 </div>
 
 <script>
 (function(){
-  const thumbs = Array.from(document.querySelectorAll('.gallery .thumb img'));
+  const thumbs = Array.from(document.querySelectorAll('.gallery img'));
   const lightbox = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightbox-img');
+  const lbImg = document.getElementById('lb-img');
   const meta = document.getElementById('meta');
-  const prevBtn = document.getElementById('prev');
-  const nextBtn = document.getElementById('next');
-  const closeBtn = document.getElementById('close');
   let current = -1;
 
   function openAt(i){
     if(i < 0 || i >= thumbs.length) return;
     current = i;
-    
-    // Set source and meta
     lbImg.src = thumbs[i].src;
-    lbImg.alt = thumbs[i].alt || '';
     meta.textContent = (i + 1) + ' / ' + thumbs.length;
-
-    // Show lightbox
     lightbox.classList.add('open');
-    lightbox.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
-
-    // Preload neighbors
-    preload(current - 1); 
-    preload(current + 1);
   }
 
   function close(){
     lightbox.classList.remove('open');
-    lightbox.setAttribute('aria-hidden','true');
     document.body.style.overflow = '';
     lbImg.src = '';
-    current = -1;
-  }
-
-  function preload(i){ 
-    if(i < 0 || i >= thumbs.length) return; 
-    const im = new Image(); 
-    im.src = thumbs[i].src; 
   }
 
   function next(){ openAt((current + 1) % thumbs.length); }
   function prev(){ openAt((current - 1 + thumbs.length) % thumbs.length); }
 
-  // Event Listeners
   thumbs.forEach((img, i) => {
     img.addEventListener('click', () => openAt(i));
-    img.parentElement.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openAt(i); }
-    });
   });
 
-  nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
-  prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
-  closeBtn.addEventListener('click', close);
+  document.getElementById('next').onclick = (e) => { e.stopPropagation(); next(); };
+  document.getElementById('prev').onclick = (e) => { e.stopPropagation(); prev(); };
+  document.getElementById('close').onclick = close;
   
-  // Close when clicking background, but not the image
-  lightbox.addEventListener('click', (e) => { 
-    if(e.target === lightbox || e.target === document.getElementById('stage')) close(); 
-  });
+  // Close on clicking the dark area
+  lightbox.onclick = (e) => { if(e.target === lightbox || e.target.className === 'stage') close(); };
 
-  document.addEventListener('keydown', (e) => {
-    if(lightbox.classList.contains('open')){
-      if(e.key === 'ArrowRight') next();
-      else if(e.key === 'ArrowLeft') prev();
-      else if(e.key === 'Escape') close();
-    }
-  });
+  document.onkeydown = (e) => {
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'ArrowRight') next();
+    if(e.key === 'ArrowLeft') prev();
+    if(e.key === 'Escape') close();
+  };
 })();
 </script>
 
