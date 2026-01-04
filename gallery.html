@@ -11,9 +11,9 @@
       --thumb-radius: 6px;
       --max-thumb-width: 300px;
       --max-thumb-height: 250px;
-      --overlay-bg: rgba(50,50,50,0.9); /* slightly grey overlay */
+      --overlay-bg: rgba(10,10,10,0.9);
+      --page-bg: #fafafa; /* original background color */
       --max-width: 1200px;
-      --page-bg: #eaeaea; /* gallery page background */
     }
 
     *{box-sizing:border-box}
@@ -30,11 +30,16 @@
       gap:12px;
       align-items:center;
       justify-content:space-between;
-      border-bottom:1px solid #ccc;
+      border-bottom:1px solid #eee;
     }
     header h1{font-size:18px; margin:0}
-    nav a{color:inherit; text-decoration:none; padding:8px 10px; border-radius:6px}
-    nav a:hover{background:#ddd}
+    nav a{
+      color:inherit;
+      text-decoration:none;
+      padding:8px 10px;
+      border-radius:6px
+    }
+    nav a:hover{background:#eee}
 
     .container{max-width:var(--max-width); margin:26px auto; padding:0 18px}
 
@@ -90,23 +95,24 @@
       max-height:90vh;
       position:relative;
       display:flex;
-      justify-content:center;
       align-items:center;
+      justify-content:center;
+      background: var(--page-bg); /* match page background */
+      border-radius:6px;
+      overflow:hidden;
     }
 
     .lightbox img{
+      display:block;
       max-width: 100%;
       max-height: 100%;
-      width: auto;
-      height: auto;
-      display: block;
-      margin: auto;
     }
 
     /* Controls */
     .btn{
       position: absolute; top:50%; transform:translateY(-50%);
-      background:transparent; border:0; font-size:32px; color:#fff; padding:8px 12px; cursor:pointer; user-select:none
+      background:transparent; border:0; font-size:32px; color:#fff;
+      padding:8px 12px; cursor:pointer; user-select:none
     }
     .btn.left{ left:8px }
     .btn.right{ right:8px }
@@ -131,6 +137,7 @@
   <p class="caption">Click any image to enlarge. Use left / right arrows or keyboard ← → to navigate; Esc to close.</p>
 
   <section class="gallery" id="gallery">
+    <!-- All 31 images -->
     <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1019.jpg" alt="DP3M1019" data-full="/hcphoto/images/DP3M1019.jpg"></figure>
     <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1065.jpg" alt="DP3M1065" data-full="/hcphoto/images/DP3M1065.jpg"></figure>
     <figure class="thumb" tabindex="0"><img src="/hcphoto/images/DP3M1084.jpg" alt="DP3M1084" data-full="/hcphoto/images/DP3M1084.jpg"></figure>
@@ -194,11 +201,29 @@
     lbImg.src = src;
     lbImg.alt = thumbs[i].alt || '';
     meta.textContent = (i+1) + ' / ' + thumbs.length;
+
     lightbox.classList.add('open');
     lightbox.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
+
+    // scale image to fill longer dimension
+    lbImg.onload = function(){
+      const stage = document.getElementById('stage');
+      const stageRatio = stage.clientWidth / stage.clientHeight;
+      const imgRatio = lbImg.naturalWidth / lbImg.naturalHeight;
+
+      if(imgRatio > stageRatio){
+        lbImg.style.width = "100%";
+        lbImg.style.height = "auto";
+      } else {
+        lbImg.style.width = "auto";
+        lbImg.style.height = "100%";
+      }
+    }
+
     preload(current-1); preload(current+1);
   }
+
   function close(){
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden','true');
@@ -206,7 +231,11 @@
     lbImg.src = '';
     current = -1;
   }
-  function preload(i){ if(i<0||i>=thumbs.length) return; const u = thumbs[i].dataset.full || thumbs[i].src; const im = new Image(); im.src = u; }
+  function preload(i){ 
+    if(i<0||i>=thumbs.length) return; 
+    const u = thumbs[i].dataset.full || thumbs[i].src; 
+    const im = new Image(); im.src = u; 
+  }
 
   function next(){ openAt((current+1) % thumbs.length); }
   function prev(){ openAt((current-1 + thumbs.length) % thumbs.length); }
