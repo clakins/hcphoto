@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A Boogie Wit Da Hoodie Concerty</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Masonry layout */
+.gallery {
+    column-count: 4;
+    column-gap: 12px;
+    padding: 12px;
+}
+
+@media (max-width: 1200px) {
+    .gallery { column-count: 3; }
+}
+
+@media (max-width: 800px) {
+    .gallery { column-count: 2; }
+}
+
+@media (max-width: 500px) {
+    .gallery { column-count: 1; }
+}
+
+.gallery img {
+    width: 100%;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    break-inside: avoid;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+}
+
+.gallery img:hover {
+    transform: scale(1.02);
+}
+</style>
+</head>
+
+<body>
+
+<h1>A Boogie Wit Da Hoodie</h1>
+
+<div class="gallery">
+
+<img src="photos/photo1.jpg">
+<img src="photos/photo2.jpg">
+<img src="photos/photo3.jpg">
+<img src="photos/photo4.jpg">
+<img src="photos/photo5.jpg">
+<img src="photos/photo6.jpg">
+<img src="photos/photo7.jpg">
+<img src="photos/photo8.jpg">
+
+</div>
+
+</body>
+</html>
