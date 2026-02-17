@@ -1,71 +1,201 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>A Boogie Wit Da Hoodie Concert</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Boogie wit da Hoodie — Bear Down</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
+:root{
+  --cols:3;
+  --gap:14px;
+  --max-width:1200px;
 }
 
-h1 {
-    text-align: center;
-    padding: 25px;
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background:#fafafa;
+  color:#111;
 }
 
-/* REAL MASONRY */
-.gallery {
-    column-width: 320px;   /* auto number of columns */
-    column-gap: 14px;
-    padding: 14px;
-    max-width: 1400px;
-    margin: auto;
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 20px;
+  border-bottom:1px solid #eee;
+}
+header h1{margin:0;font-size:18px}
+nav a{
+  text-decoration:none;
+  padding:8px 10px;
+  border-radius:6px;
+  color:inherit;
+}
+nav a:hover{background:#eee}
+
+.container{
+  max-width:var(--max-width);
+  margin:26px auto;
+  padding:0 18px;
 }
 
-.gallery img {
-    width: 100%;
-    height: auto;          /* IMPORTANT */
-    display: block;
-    margin-bottom: 14px;
-    border-radius: 10px;
-    break-inside: avoid;
-    box-shadow: 0 5px 14px rgba(0,0,0,.15);
-    transition: transform .25s ease;
+.caption{
+  font-size:13px;
+  color:#666;
+  margin-bottom:10px;
 }
 
-.gallery img:hover {
-    transform: scale(1.03);
+/* ===== MOSAIC GRID ===== */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(var(--cols),1fr);
+  gap:var(--gap);
+  grid-auto-rows:8px;
+}
+
+.thumb{
+  overflow:hidden;
+  border-radius:6px;
+  background:#ddd;
+}
+.thumb img{
+  width:100%;
+  height:auto;
+  display:block;
+  transition:transform .25s ease;
+}
+.thumb:hover img{transform:scale(1.03)}
+
+@media(max-width:900px){:root{--cols:2}}
+@media(max-width:520px){:root{--cols:1}}
+
+/* ===== LIGHTBOX ===== */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  visibility:hidden;
+  opacity:0;
+  transition:.2s;
+}
+.lightbox.open{visibility:visible;opacity:1}
+
+.lightbox img{
+  max-width:92vw;
+  max-height:90vh;
+}
+
+.btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:30px;
+  color:white;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+.prev{left:20px}
+.next{right:20px}
+.close{
+  position:absolute;
+  top:20px;
+  right:20px;
+  font-size:26px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>A Boogie Wit Da Hoodie</h1>
+<header>
+  <h1>A Boogie wit da Hoodie</h1>
+  <nav><a href="index.html">← Home</a></nav>
+</header>
 
-<div class="gallery">
+<main class="container">
+<p class="caption">Click image to enlarge. Arrow keys to navigate.</p>
 
-<img src="/hcphoto/images/DSC_7655.jpg">
-<img src="/hcphoto/images/DSC_7658.jpg">
-<img src="/hcphoto/images/DSC_7726.jpg">
-<img src="/hcphoto/images/DSC_7736.jpg">
-<img src="/hcphoto/images/DSC_7746.jpg">
-<img src="/hcphoto/images/DSC_7787.jpg">
-<img src="/hcphoto/images/DSC_7822.jpg">
-<img src="/hcphoto/images/DSC_7837.jpg">
-<img src="/hcphoto/images/DSC_7848.jpg">
-<img src="/hcphoto/images/DSC_7886.jpg">
-<img src="/hcphoto/images/DSC_7918.jpg">
-<img src="/hcphoto/images/DSC_7941.jpg">
-<img src="/hcphoto/images/DSC_7942.jpg">
-<img src="/hcphoto/images/DSC_7968.jpg">
-<img src="/hcphoto/images/DSC_8018.jpg">
-<img src="/hcphoto/images/DSC_8031.jpg">
+<section class="gallery" id="gallery">
 
+<figure class="thumb"><img src="/hcphoto/images/DSC_7655.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7658.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7726.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7736.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7746.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7787.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7822.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7837.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7848.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7886.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7918.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7941.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7942.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_7968.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_8018.jpg"></figure>
+<figure class="thumb"><img src="/hcphoto/images/DSC_8031.jpg"></figure>
+
+</section>
+</main>
+
+<div class="lightbox" id="lightbox">
+<button class="btn prev">◄</button>
+<img id="lightimg">
+<button class="btn next">►</button>
+<button class="btn close">✕</button>
 </div>
+
+<script>
+const imgs=[...document.querySelectorAll('.thumb img')];
+const lb=document.getElementById('lightbox');
+const li=document.getElementById('lightimg');
+let cur=0;
+
+imgs.forEach((img,i)=>img.onclick=()=>open(i));
+
+function open(i){
+ cur=i;
+ li.src=imgs[i].src;
+ lb.classList.add('open');
+}
+function close(){lb.classList.remove('open')}
+function next(){open((cur+1)%imgs.length)}
+function prev(){open((cur-1+imgs.length)%imgs.length)}
+
+document.querySelector('.close').onclick=close;
+document.querySelector('.next').onclick=next;
+document.querySelector('.prev').onclick=prev;
+
+document.addEventListener('keydown',e=>{
+ if(!lb.classList.contains('open'))return;
+ if(e.key==="ArrowRight")next();
+ if(e.key==="ArrowLeft")prev();
+ if(e.key==="Escape")close();
+});
+
+/* Masonry sizing */
+function resize(){
+ const grid=document.querySelector('.gallery');
+ const gap=parseInt(getComputedStyle(grid).gap);
+ const row=8;
+ grid.querySelectorAll('.thumb').forEach(item=>{
+   const img=item.querySelector('img');
+   if(!img.complete)return;
+   const h=img.getBoundingClientRect().height;
+   item.style.gridRowEnd="span "+Math.ceil((h+gap)/(row+gap));
+ });
+}
+window.addEventListener('load',resize);
+window.addEventListener('resize',resize);
+imgs.forEach(i=>i.addEventListener('load',resize));
+</script>
 
 </body>
 </html>
