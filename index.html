@@ -4,151 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Henry Calkins - Portfolio</title>
-    <!-- Load Tailwind CSS CDN -->
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Custom configuration for the font -->
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif'],
-                    },
-                    colors: {
-                        'primary-dark': '#333333',
-                        'light-gray': '#eeeeee',
-                        'text-muted': '#666666',
+                        sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial']
                     }
                 }
             }
         }
     </script>
+
     <style>
-        /* Ensures the whole page content is centered and contained */
         .container-fluid {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem; /* Add horizontal padding */
+            padding: 0 2rem;
         }
 
-        /* Custom style for the circular masked image effect */
-    
-    background-color: transparent;
-    background-image: url('images/20230307_190204-5fad.jpg');
-    background-size: cover; /* make it cover the box nicely */
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 100%;          /* take full width of column */
-    max-width: 500px;     /* optional: cap the size */
-    aspect-ratio: 1 / 1;  /* keep it square */
-    border-radius: 50%;   /* make it circular */
-    margin: 0 auto;       /* center in column */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-                0 2px 4px -2px rgba(0, 0, 0, 0.06);
-
-
-        /* Style for exhibition titles */
-        .exhibition-item a {
-            font-weight: 600; /* Semi-bold for the main link text */
-            color: #333333;
-            text-decoration: none;
-            transition: color 0.2s;
+        /* NORMAL SQUARE IMAGE */
+        .cover-photo img{
+            width:100%;
+            max-width:500px;
+            aspect-ratio:1/1;
+            object-fit:cover;
+            border-radius:12px; /* change to 0 if you want sharp corners */
+            margin:0 auto;
+            display:block;
+            box-shadow:0 4px 6px rgba(0,0,0,0.15);
         }
 
-        .exhibition-item a:hover {
-            color: #000000;
-            text-decoration: underline;
-        }
-
-        /* Mobile adjustment for better spacing */
-        @media (max-width: 768px) {
-            .container-fluid {
-                padding: 0 1rem;
-            }
+        @media (max-width:768px){
+            .container-fluid{ padding:0 1rem; }
         }
     </style>
 </head>
-<body class="bg-white font-sans text-primary-dark">
 
-    <header class="py-8 border-b border-gray-100 mb-10">
-        <div class="container-fluid flex justify-between items-center">
-            <!-- Site Title / Logo -->
-            <h1 class="text-xxl sm:text-2xl font-bold tracking-wide">
-                Henry Calkins
-            </h1>
+<body class="bg-white font-sans text-gray-900">
 
-            <!-- Navigation Links -->
-            <nav>
-                <ul class="flex space-x-4 sm:space-x-6 text-sm sm:text-base font-medium text-gray-700">
-                    <li><a href="#" class="hover:text-black transition duration-150">Works</a></li>
-                    <li><a href="about.html" class="hover:text-black transition duration-150">About</a></li>
-                    <li><a href="contact.html" class="hover:text-black transition duration-150">Contact</a></li>
-                    <li><a href="#" class="hover:text-black transition duration-150">News</a></li>
-                    <li><a href="gallery.html" class="hover:text-black transition duration-150">Gallery</a></li>
-                </ul>
-            </nav>
+<header class="py-8 border-b border-gray-100 mb-10">
+    <div class="container-fluid flex justify-between items-center">
+        <h1 class="text-xl sm:text-2xl font-bold tracking-wide">
+            Henry Calkins
+        </h1>
+
+        <nav>
+            <ul class="flex space-x-6 text-sm font-medium text-gray-700">
+                <li><a href="#" class="hover:text-black">Works</a></li>
+                <li><a href="about.html" class="hover:text-black">About</a></li>
+                <li><a href="contact.html" class="hover:text-black">Contact</a></li>
+                <li><a href="#" class="hover:text-black">News</a></li>
+                <li><a href="gallery.html" class="hover:text-black">Gallery</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container-fluid">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+
+    <!-- LEFT COLUMN IMAGE -->
+    <div class="lg:col-span-2 cover-photo">
+        <img src="/hcphoto/images/20230307_190204-5fad.jpg" alt="Cover Photo">
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="lg:col-span-1 space-y-8 pb-10">
+
+        <div>
+            <h2 class="text-xs uppercase tracking-widest text-gray-500 mb-4">
+                FEATURED WORK
+            </h2>
+            <li>
+                <a href="beardown.html" class="font-semibold hover:underline">Bear Down</a>
+                <span class="text-gray-500 italic">Personal Project</span><br>
+                11/8<br>
+                Arizona Stadium, Tucson
+            </li>
         </div>
-    </header>
 
-    <main class="container-fluid">
-        <!-- Main Content Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+        <div>
+            <h2 class="text-xs uppercase tracking-widest text-gray-500 mb-4">
+                RECENT WORKS
+            </h2>
 
-            <!-- Left Column: Image -->
-            <div class="lg:col-span-2">
-                <div class="circular-mask rounded-lg overflow-hidden h-full">
-                    <!-- The circular masking is done entirely via CSS ::after element -->
-                </div>
-            </div>
+            <ul class="space-y-4 text-sm">
 
-            <!-- Right Column: Exhibitions/News -->
-            <div class="lg:col-span-1 space-y-8 pb-10">
-                
-                <!-- CURRENT EXHIBITION -->
-                <div>
-                    <h2 class="text-xs font-medium uppercase tracking-widest text-text-muted mb-4">
-                        FEATURED WORK
-                    </h2>
-                    <li class="exhibition-item">
-                            <a href="beardown.html">Bear Down</a> <span class="text-text-muted italic">Personal Project</span><br>
-                            11/8<br>
-                            Arizona Stadium, Tucson
-                    </li>
-                </div>
+                <li>
+                    <a href="aboogie.html" class="font-semibold hover:underline">
+                        A Boogie Wit Da Hoodie
+                    </a>
+                    <span class="text-gray-500 italic">Media Event</span><br>
+                    9/26/26<br>
+                    Greek Row, Tucson
+                </li>
 
-                <!-- RECENT EXHIBITIONS -->
-                <div>
-                    <h2 class="text-xs font-medium uppercase tracking-widest text-text-muted mb-4">
-                        RECENT WORKS
-                    </h2>
-                    <ul class="space-y-4 text-sm">
-                         <!-- Item 1 -->
-                        <li class="exhibition-item">
-                            <a href="aboogie.html">A Boogie Wit Da Hoodie</a> <span class="text-text-muted italic">Media Event</span><br>
-                            9/26/26<br>
-                            Greek Row, Tucson
-                        </li>
-                        <!-- Item 2 -->
-                        <li class="exhibition-item">
-                            <a href="miraclemile.html">Miracle Mile</a> <span class="text-text-muted italic">Class Assignment</span><br>
-                            10/20-10/30<br>
-                            Oracle Road, Tucson
-                        </li>
+                <li>
+                    <a href="miraclemile.html" class="font-semibold hover:underline">
+                        Miracle Mile
+                    </a>
+                    <span class="text-gray-500 italic">Class Assignment</span><br>
+                    10/20-10/30<br>
+                    Oracle Road, Tucson
+                </li>
 
-                        <!-- Item 3 -->
-                        <li class="exhibition-item">
-                            <a href="potraiture.html">Portraiture</a> <span class="text-text-muted italic">Class Assignment</span><br>
-                            Lester Street, Tucson
-                        </li>
-                        
+                <li>
+                    <a href="portraiture.html" class="font-semibold hover:underline">
+                        Portraiture
+                    </a>
+                    <span class="text-gray-500 italic">Class Assignment</span><br>
+                    Lester Street, Tucson
+                </li>
 
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
+            </ul>
         </div>
-    </main>
-    
+
+    </div>
+</div>
+</main>
+
 </body>
 </html>
