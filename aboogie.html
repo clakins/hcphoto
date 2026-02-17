@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>A Boogie Wit Da Hoodie Concerty</title>
+<title>A Boogie Wit Da Hoodie Concert</title>
 
 <style>
 body {
@@ -11,42 +11,33 @@ body {
     background: #f4f4f4;
 }
 
-/* Title */
 h1 {
     text-align: center;
-    padding: 20px;
+    padding: 25px;
 }
 
-/* Masonry layout */
+/* REAL MASONRY */
 .gallery {
-    column-count: 4;
-    column-gap: 12px;
-    padding: 12px;
-}
-
-@media (max-width: 1200px) {
-    .gallery { column-count: 3; }
-}
-
-@media (max-width: 800px) {
-    .gallery { column-count: 2; }
-}
-
-@media (max-width: 500px) {
-    .gallery { column-count: 1; }
+    column-width: 320px;   /* auto number of columns */
+    column-gap: 14px;
+    padding: 14px;
+    max-width: 1400px;
+    margin: auto;
 }
 
 .gallery img {
     width: 100%;
-    margin-bottom: 12px;
-    border-radius: 8px;
+    height: auto;          /* IMPORTANT */
+    display: block;
+    margin-bottom: 14px;
+    border-radius: 10px;
     break-inside: avoid;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition: transform 0.2s;
+    box-shadow: 0 5px 14px rgba(0,0,0,.15);
+    transition: transform .25s ease;
 }
 
 .gallery img:hover {
-    transform: scale(1.02);
+    transform: scale(1.03);
 }
 </style>
 </head>
